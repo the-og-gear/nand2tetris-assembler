@@ -117,4 +117,13 @@ export class Parser {
         }
         return this.currentCommand.split(';')[1] || "null"; // Get part after ';'
     }
+
+    /**
+     * Resets the parser to the initial state.
+     * This method clears the current command and resets the command index.
+     */
+    reset(): void {
+        this.commandIndex = 0;
+        this.currentCommand = "";
+    }
 }

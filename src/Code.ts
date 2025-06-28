@@ -1,10 +1,4 @@
 export class Code {
-    private address: number;
-
-    constructor() {
-        this.address = 0;
-    }
-
     static dest(mnemonic: string): string {
         if (mnemonic === "null") {
             return "000";
