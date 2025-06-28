@@ -1,6 +1,6 @@
 import { closeSync, openSync, readFileSync } from "node:fs";
 
-enum COMMAND_TYPE {
+export enum COMMAND_TYPE {
     A_COMMAND,
     C_COMMAND,
     L_COMMAND
@@ -9,7 +9,7 @@ enum COMMAND_TYPE {
 /**
  * Parser class for handling file parsing operations.
  */
-class Parser {
+export class Parser {
     //==============================================================================
     private data: string[];
     /**
@@ -85,7 +85,12 @@ class Parser {
         if (this.commandType() !== COMMAND_TYPE.C_COMMAND) {
             throw new Error("Current command is not a C_COMMAND.");
         }
-        return this.currentCommand.split('=')[0].trim() || "null"; // Return "null" if no dest part
+        const keywords = this.currentCommand.split('='); // Split by '='
+        if (keywords.length > 1) {
+            return this.currentCommand.split('=')[0].split(";")[0].trim(); // Return "null" if no dest part
+        } else {
+            return "null";
+        }
     }
 
     /**
